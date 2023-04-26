@@ -9,7 +9,7 @@
 void check_atty(void)
 {
 	if (isatty(STDIN_FILENO))
-		printf("cisfun$ ");
+		printf("$ ");
 }
 
 /**
