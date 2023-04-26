@@ -91,7 +91,7 @@ void loop(char *error_msg)
 				f(arv);
 			}
 			else if (!pathname)
-				fprintf(stderr, "%s: %d: %s: not found\n", argv[0], line_number, argv[0]);
+				fprintf(stderr, "%s: %ld: %s: not found\n", error_msg, line_number, arv[0]);
 			else if (pathname)
 			{
 				free(arv[0]);
