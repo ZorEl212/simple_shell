@@ -28,13 +28,13 @@ void cd(char **arv)
 	char *dir, *curr_dir;
 
 	/* Check if path is null or "~". assign dir to HOME if so */
-	if (path == NULL || strcmp(path, "~") == 0)
+	if (path == NULL || _strcmp(path, "~") == 0)
 	{
-		dir = getenv("HOME");
+		dir = _getenv("HOME");
 	}
-	else if (strcmp(path, "-") == 0) /* Set to prev dir if satisfied */
+	else if (_strcmp(path, "-") == 0) /* Set to prev dir if satisfied */
 	{
-		dir = getenv("OLDPWD");
+		dir = _getenv("OLDPWD");
 	}
 	else
 	{
@@ -44,7 +44,10 @@ void cd(char **arv)
 	curr_dir = getcwd(NULL, 0); /* Get absolute path of current dir */
 	if (chdir(dir) != 0)
 	{
-		printf("cd: %s: No such file or directory\n", dir);
+		write(STDOUT_FILENO, "cd: ", 4);
+		write(STDOUT_FILENO, "can't cd to ", 12);
+		write(STDOUT_FILENO, dir, _strlen(dir));
+		write(STDOUT_FILENO, "\n", 1);
 	}
 	else
 	{
@@ -64,7 +67,8 @@ void env(char **arv __attribute__((unused)))
 	/* loop through environ to print all variables */
 	for (i = 0; environ[i] != NULL; i++)
 	{
-		printf("%s\n", environ[i]);
+		write(STDOUT_FILENO, environ[i], strlen(environ[i]));
+		write(STDOUT_FILENO, "\n", 1);
 	}
 }
 

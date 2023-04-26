@@ -24,7 +24,7 @@ void freearv(char **arv)
  */
 char *create_var(const char *name, const char *value)
 {
-	size_t name_len = strlen(name), value_len = strlen(value);
+	size_t name_len = _strlen(name), value_len = _strlen(value);
 	size_t var_len = name_len + 1 + value_len + 1;
 
 	char *new_var = malloc(var_len);
@@ -54,9 +54,9 @@ int rep_var(const char *name, char *new_var)
 
 	while (*p)
 	{
-		size_t name_len = strlen(name);
+		size_t name_len = _strlen(name);
 
-		if (strncmp(*p, name, name_len) == 0 && (*p)[name_len] == '=')
+		if (_strncmp(*p, name, name_len) == 0 && (*p)[name_len] == '=')
 		{
 			*p = new_var;
 			return (0);

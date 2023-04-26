@@ -25,15 +25,15 @@ void execute(char **argv, int line_number, char *error_msg)
 	{
 		if (execve(argv[0], argv, environ) == -1)
 		{
-			size_t message_len = strlen(error_msg);
+			size_t message_len = _strlen(error_msg);
 			char *line_string = _itoa(line_number);
-			size_t line_len = strlen(line_string);
+			size_t line_len = _strlen(line_string);
 
 			write(STDERR_FILENO, error_msg, message_len);
 			write(STDERR_FILENO, ": ", 2);
 			write(STDERR_FILENO, line_string, line_len);
 			write(STDERR_FILENO, ": ", 2);
-			write(STDERR_FILENO, argv[0], strlen(argv[0]));
+			write(STDERR_FILENO, argv[0], _strlen(argv[0]));
 			write(STDERR_FILENO, ": not found\n", 12);
 
 			free(line_string);

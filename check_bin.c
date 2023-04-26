@@ -19,7 +19,7 @@ void (*checkbuild(char **arv))(char **arv)
 
 	for (i = 0; buildins[i].name != NULL; i++)
 	{
-		if (strcmp(arv[0], buildins[i].name) == 0)
+		if (_strcmp(arv[0], buildins[i].name) == 0)
 		{
 			return (buildins[i].func);
 		}

@@ -9,7 +9,7 @@
 void check_atty(void)
 {
 	if (isatty(STDIN_FILENO))
-		printf("$ ");
+		write(STDOUT_FILENO, "$ ", 2);
 }
 
 /**
@@ -27,7 +27,7 @@ void _EOF(int len, char *buff)
 	{
 		if (isatty(STDIN_FILENO)) /* If input stream is terminal */
 		{
-			puts("\n");
+
 			free(buff);
 		}
 		exit(0);
@@ -45,8 +45,8 @@ void sig_handler(int sig_num)
 {
 	if (sig_num == SIGINT) /* SIGINT -signal for interrupt (C-c). */
 	{
-		printf("\n");
-		printf("cisfun$ ");
+		write(STDOUT_FILENO, "\n", 1);
+		write(STDOUT_FILENO, "$ ", 3);
 		fflush(stdout); /* Print out whatever is in the buffer in output stream
 				  * this is to fix C-c bug that prints out the prompt on
 				  * the same line iff multiple C-c is pressed.
@@ -91,7 +91,7 @@ void loop(char *error_msg)
 				f(arv);
 			}
 			else if (!pathname)
-				fprintf(stderr, "%s: %ld: %s: not found\n", error_msg, line_number, arv[0]);
+				execute(arv, line_number, error_msg);
 			else if (pathname)
 			{
 				free(arv[0]);

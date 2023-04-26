@@ -9,12 +9,12 @@
  */
 int my_unsetenv(const char *name)
 {
-	size_t name_len = strlen(name);
+	size_t name_len = _strlen(name);
 	char **p = environ, **q;
 
 	while (*p)
 	{
-		if (strncmp(*p, name, name_len) == 0 && (*p)[name_len] == '=')
+		if (_strncmp(*p, name, name_len) == 0 && (*p)[name_len] == '=')
 		{
 /* Shift remaining strings down one position to overwrite the removed string */
 			for (q = p; *q; ++q)
